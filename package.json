@@ -1,0 +1,34 @@
+{
+  "name": "playwright-e2e-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Template monorepo for Playwright end-to-end tests (sample package tests google.com).",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm run pw:run --workspace=packages/google",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint \"packages/**/*.ts\" \"libs/**/*.ts\"",
+    "lint:tags": "eslint 'packages/**/*.spec.ts'",
+    "typecheck": "tsc --noEmit -p packages/google",
+    "test:lint-rule": "node eslint-rules/require-test-tags.test.mjs && node eslint-rules/require-test-step.test.mjs && node eslint-rules/no-ungrouped-test-actions.test.mjs && node eslint-rules/no-inline-selectors.test.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "1.64.1",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "dotenv": "^16.0.0",
+    "eslint": "^10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-playwright": "^2.10.4",
+    "prettier": "^3.0.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["node"],
+    "paths": {
+      "@playwright-setup": ["../../libs/playwright-setup.ts"],
+      "@config-interface": ["../../libs/config-interface.ts"],
+      "@common": ["../../libs/page-helpers/common.ts"],
+      "@accessibility": ["../../libs/page-helpers/accessibility.ts"],
+      "@google/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts", "../../libs/**/*.ts"],
+  "exclude": ["node_modules"]
+}

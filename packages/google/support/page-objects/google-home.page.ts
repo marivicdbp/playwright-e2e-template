@@ -1,7 +1,15 @@
 import { expect, type Locator, type Page } from '@playwright/test'
 import { BasePage } from '@common'
 
+// A "page object" is a class that knows how to find things on one page and
+// how to interact with them. Tests call its methods instead of using selectors
+// directly, so if Google changes its HTML you only fix it here, once.
+//
+// Tip: run `npm run codegen` to click around google.com and let Playwright
+// suggest locators for you, then paste the good ones into a class like this.
 export class GoogleHomePage extends BasePage {
+  // Locators: "how to find" each element. Prefer getByRole / getByLabel —
+  // they match what a user sees, so they rarely break.
   readonly logo: Locator
   readonly searchBox: Locator
   readonly suggestions: Locator
@@ -27,6 +35,7 @@ export class GoogleHomePage extends BasePage {
     this.consentAcceptButton = page.getByRole('button', { name: /accept all/i })
   }
 
+  // Actions: things a user does.
   async open() {
     await this.goto('/')
     await this.dismissConsentIfShown()
@@ -48,6 +57,8 @@ export class GoogleHomePage extends BasePage {
     await this.searchBox.press('Enter')
   }
 
+  // Assertions: things we check. Name them should*/verify*/assert* so the
+  // linter knows the test contains a check.
   async shouldBeLoaded() {
     await this.shouldHaveTitle('Google')
     await expect(this.logo).toBeVisible()

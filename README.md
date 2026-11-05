@@ -1,36 +1,40 @@
 # Playwright E2E Template
 
-A starter monorepo for Playwright end-to-end tests in TypeScript. It ships with
-a sample `google` package that tests [google.com](https://www.google.com), plus
-the conventions that keep a growing suite maintainable:
+A beginner-friendly starter project for writing browser tests with
+[Playwright](https://playwright.dev) and TypeScript. It comes with working
+example tests against [google.com](https://www.google.com) that you can copy.
 
-- **One package per app under test** (`packages/<app>`) sharing one config factory
-- **Page objects + fixtures**, so specs read as scenarios
-- **Enforced tagging** (7-tag standard) for filtering and reporting
-- **Enforced `test.step` blocks**, so reports and CI logs read as labelled steps
-- **No inline selectors in specs**, enforced by a custom ESLint rule
-- **Accessibility checks** via axe-core
-- **GitHub Actions CI** with lint, typecheck, and a per-package test matrix
+> **New to this?** Read **[docs/getting-started.md](docs/getting-started.md)** —
+> it walks you from installing Node to writing your first test.
 
 ## Quick start
 
 ```bash
-nvm use                      # Node 24
-npm install
-npx playwright install chromium
-npm test                     # runs packages/google
+npm run setup        # install packages + Chromium (first time only)
+npm test             # run all tests
+npm run test:ui      # open Playwright's visual runner (great for learning)
+npm run report       # view the HTML report of the last run
 ```
 
-Inside a package:
+Other handy commands:
 
-```bash
-cd packages/google
-npm run pw:run               # headless
-npm run pw:open              # UI mode
-npm run pw:headed
-npx playwright test --grep @TestType:Smoke
-npm run pw:report            # open the last HTML report
-```
+| Command               | What it does                                  |
+| --------------------- | --------------------------------------------- |
+| `npm run test:headed` | Run tests with the browser visible            |
+| `npm run test:debug`  | Step through a test line by line              |
+| `npm run test:smoke`  | Run only tests tagged `@TestType:Smoke`       |
+| `npm run codegen`     | Record clicks on google.com and generate code |
+| `npm run lint`        | Check code follows the conventions            |
+| `npm run format`      | Auto-format all files                         |
+
+## What's included
+
+- Example **tests**, **page objects**, and **fixtures** with explanatory comments
+- Shared Playwright config (screenshots, videos and traces on failure)
+- **Accessibility** check example using axe-core
+- **Lint rules** that teach good habits (tags, named steps, no selectors in tests)
+- **GitHub Actions CI** that lints and runs tests on every push/PR
+- VS Code recommended extensions and format-on-save
 
 ## Layout
 
@@ -100,17 +104,6 @@ Rules, enforced by `npm run lint`:
 Then follow the printed steps (tsconfig alias, `@Product` allowlist, CI matrix).
 Add environments by creating `config-files/<env>.ts` and another project entry
 in the package's `playwright.config.ts`.
-
-## Scripts
-
-| Command                  | What it does                           |
-| ------------------------ | -------------------------------------- |
-| `npm test`               | Run the google package tests           |
-| `npm run lint`           | ESLint (incl. tag/step/selector rules) |
-| `npm run lint:tags`      | Lint spec files only                   |
-| `npm run typecheck`      | `tsc --noEmit`                         |
-| `npm run test:lint-rule` | Unit tests for the custom ESLint rules |
-| `npm run format`         | Prettier write                         |
 
 ## Notes on the google.com sample
 

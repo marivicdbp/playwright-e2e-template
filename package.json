@@ -8,6 +8,13 @@
   ],
   "scripts": {
     "test": "npm run pw:run --workspace=packages/google",
+    "test:ui": "npm run pw:open --workspace=packages/google",
+    "test:headed": "npm run pw:headed --workspace=packages/google",
+    "test:debug": "npm run pw:debug --workspace=packages/google",
+    "test:smoke": "npm run pw:run --workspace=packages/google -- --grep @TestType:Smoke",
+    "report": "npm run pw:report --workspace=packages/google",
+    "codegen": "playwright codegen https://www.google.com",
+    "setup": "npm install && npx playwright install chromium",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint \"packages/**/*.ts\" \"libs/**/*.ts\"",
